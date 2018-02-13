@@ -1,0 +1,36 @@
+<%= link_to("<< Back to Classrooms", classrooms_path) %>
+<br>
+
+<br>
+<h1><%= @classroom.classroom_name%></h1>
+<br>
+<h2> Teacher <br> <%= @id = @classroom.id
+
+@teacher = Teacher.find(@id).first_name
+%></h2>
+
+<div>
+
+  <table>
+      <th>Pupils</th>
+
+      <% @classroom_pupils.each do |pupil|%>
+
+       <tr>
+        <td><%= pupil.first_name %></td>
+        <td><%= pupil.last_name %></td>
+  </table>
+
+             <% @id = pupil.id%>
+
+             <%= form_for(@actual, :url => actuals_path, :method => 'post') do |f| %>
+            <td><%= f.select :attendance, options_for_select([["Select One", ""], "Am", "Pm", "FT"]) %></td>
+                <%=f.hidden_field :pupil_id, value: @id%>
+                <%=f.hidden_field :date, value: Date.today%>
+
+                  <div>
+                    <%= f.submit("Submit") %>
+                  </div>
+            <%end%>
+      <%end%>
+  </div>

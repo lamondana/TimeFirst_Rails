@@ -1,0 +1,13 @@
+<h1>Classrooms Register</h1>
+
+
+<% @pupils.each do |pupil|%>
+    <table>
+      <td><%= pupil.first_name %></td>
+      <td><%= pupil.last_name%></td>
+        <% @actual= Actual.new%>
+            <td><% @actual.pupil_id = pupil.id%></td>
+            <td><% @actual.pupil_id%></td>
+            <% @actual.save %>
+      </table>
+<%end%>
