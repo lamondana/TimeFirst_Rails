@@ -7,15 +7,10 @@ class ClassroomsController < ApplicationController
   end
 
   def show
-    @pupils = Pupil.all
     @classroom = Classroom.find(params[:id])
-    @classroom_pupils = @pupils.where(:classroom_id => @classroom.id)
-    @teachers = Teacher.all
-    @actual = Actual.new
-
-end
-
-
+    @pupils = @classroom.pupils
+    @teacher = @classroom.teacher
+  end
 
   def new
   end
@@ -23,6 +18,7 @@ end
 
 
   def edit
+
   end
 
   def delete

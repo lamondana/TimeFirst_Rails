@@ -8,7 +8,6 @@ class ActualsController < ApplicationController
       @pupils = Pupil.all
       @actual = Actual.all
       @pupilsInClass = Pupil.where(:id == :pupil_id)
-
   end
 
   def edit
@@ -19,11 +18,16 @@ class ActualsController < ApplicationController
   end
 
   def new
-    @pupils = Pupil.all.where(:classroom_id => 1)
-    @actual = Actual.new
+    @actual = []
+    5.times do
+      @actual << Actual.new
+    end
+    @p = Actual.joins(:pupil).where(:pupils => {:classroom => 1}, :actuals => {:date => Date.today})
+
   end
 
   def create
+      @p = Actual.joins(:pupil).where(:pupils => {:classroom => 1}, :actuals => {:date => Date.today})
     @actual = Actual.new(actual_params)
     if @actual.save
       flash[:notice] = "Actual created successfully."
@@ -31,7 +35,8 @@ class ActualsController < ApplicationController
     else
       render("new")
     end
-end
+   end
+
 
   def delete
   end

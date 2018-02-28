@@ -4,33 +4,42 @@
 <br>
 <h1><%= @classroom.classroom_name%></h1>
 <br>
-<h2> Teacher <br> <%= @id = @classroom.id
-
-@teacher = Teacher.find(@id).first_name
-%></h2>
+  <h2> Teacher <br>
+    <%= @teacher.full_name %>
+  </h2>
 
 <div>
 
   <table>
-      <th>Pupils</th>
+    <th>Pupils</th>
 
-      <% @classroom_pupils.each do |pupil|%>
+    <%= form_for(@actual, :url => actuals_path, :method => 'post') do |f| %>
+    <% @pupils.each do |pupil|%>
+    <% @actual = Actual.new%>
+    <tr>
+      <td><%= pupil.first_name %></td>
+      <td><%= pupil.last_name %></td>
 
-       <tr>
-        <td><%= pupil.first_name %></td>
-        <td><%= pupil.last_name %></td>
+    <% @id = pupil.id%>
+
+    <td><%= f.select :attendance, options_for_select([["Select One", ""], "Am", "Pm", "FT"]) %></td>
+    <%=f.hidden_field :pupil_id, value: @id%>
+    <%=f.hidden_field :date, value: Date.today%>
+
+
+    <%end%>
   </table>
-
-             <% @id = pupil.id%>
-
-             <%= form_for(@actual, :url => actuals_path, :method => 'post') do |f| %>
-            <td><%= f.select :attendance, options_for_select([["Select One", ""], "Am", "Pm", "FT"]) %></td>
-                <%=f.hidden_field :pupil_id, value: @id%>
-                <%=f.hidden_field :date, value: Date.today%>
-
-                  <div>
-                    <%= f.submit("Submit") %>
-                  </div>
-            <%end%>
-      <%end%>
+    <div>
+      <%= submit_tag("Submit") %>
+    </div>
+    <%end%>
   </div>
+
+
+
+  <%= form_for @classroom do |f| %>
+   <%= f.fields_for :actual do |actual_form| %>
+     <td><%= actual_form.select :attendance, options_for_select([["Select One", ""], "Present", "Absent"]) %></td>
+
+     <%end%>
+       <%end%>
