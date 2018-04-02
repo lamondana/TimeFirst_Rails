@@ -27,15 +27,17 @@ class ActualsController < ApplicationController
   end
 
   def create
-      @p = Actual.joins(:pupil).where(:pupils => {:classroom => 1}, :actuals => {:date => Date.today})
-    @actual = Actual.new(actual_params)
-    if @actual.save
-      flash[:notice] = "Actual created successfully."
-      redirect_to(actuals_path)
-    else
-      render("new")
+    date = params[:date]
+    actuals = params[:actuals].values
+    actuals.each do |a|
+      Actual.create({
+        date: date,
+        pupil_id: a[:pupil_id],
+        attendance: a[:attendance]
+      })
     end
-   end
+    redirect_back(fallback_location: classrooms_url)
+  end
 
 
   def delete

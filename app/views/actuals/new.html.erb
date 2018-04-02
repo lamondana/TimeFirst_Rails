@@ -10,7 +10,7 @@
 <tr>
   <td><%= Pupil.find(@x).first_name %>  </td>
   <td><%= label_tag "actuals__attendance", "Attendance" %></td>
-  <td><%= f.select :attendance, options_for_select([["Select One", ""], "Am", "Pm", "FT"]) %></td>
+  <td><%= f.select :attendance, options_for_select([["Select One", ""], "Present", "Absent"]) %></td>
   <%=f.hidden_field :pupil_id, value: @id%>
   <%=f.hidden_field :date, value: Date.today%>
 

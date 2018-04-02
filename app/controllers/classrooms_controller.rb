@@ -10,6 +10,7 @@ class ClassroomsController < ApplicationController
     @classroom = Classroom.find(params[:id])
     @pupils = @classroom.pupils
     @teacher = @classroom.teacher
+    @date = Date.today
   end
 
   def new
