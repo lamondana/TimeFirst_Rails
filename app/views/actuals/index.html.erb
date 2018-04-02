@@ -1,2 +1,32 @@
-<h1>Actuals#index</h1>
-<p>Find me in app/views/actuals/index.html.erb</p>
+<%= link_to("<< Back to List") %>
+
+<div>
+  <h2>Report</h2>
+
+  <table>
+    <tr>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Attendance</th>
+    <th>Circumstances</th>
+    </tr>
+
+      <td><% @p.each do |actual| %></td>
+
+      <tr>
+
+        <% @pupil_id = actual.pupil_id%>
+
+        <td><%= Pupil.find(@pupil_id).first_name%></td>
+        <td><%= Pupil.find(@pupil_id).last_name%></td>
+
+        <td><%=actual.attendance%></td>
+        <td><%=actual.circumstances%></td>
+
+      </tr>
+        <%end%>
+
+
+  </table>
+
+</div>

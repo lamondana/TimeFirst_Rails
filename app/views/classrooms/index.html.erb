@@ -1,3 +1,4 @@
+<%= link_to "back", request.referer.present? ? request.referer : classrooms_path %>
 <h1>Classrooms</h1>
 
 <h3><%= Time.now.strftime("%A, %d/%m/%Y") %></h3>
@@ -8,9 +9,11 @@
 
   <td>
     <%= link_to("Show", classroom_path(classroom), :class => 'action show') %>
-    <%= link_to("Edit", edit_classroom_path(classroom), :class => 'action edit') %>
-    <%= link_to("Delete", classroom_path(classroom), :class => 'action delete', :method => :delete) %>
+    <%= link_to("Register", edit_classroom_path(classroom), :class => 'action edit') %>
+    <%= link_to("Update", classroom_path(classroom), :class => 'action update', :method => :update) %>
+
   </td>
 </tr>
 <%end%>
+
 </table>

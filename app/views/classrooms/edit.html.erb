@@ -1,2 +1,48 @@
-<h1>Classrooms#edit</h1>
-<p>Find me in app/views/classrooms/edit.html.erb</p>
+<%= link_to "back", request.referer.present? ? request.referer : default_path %>
+
+<h1>Registation for  <%= @classroom.classroom_name%></h1>
+
+
+<table>
+  <tr>
+  <th>Name</th>
+  <th>Surname</th>
+  <th>Attendance</th>
+  <th>Circumstances</th>
+  </tr>
+  
+
+
+
+    <td><% @actuals.each do |actual| %></td>
+    <tr>
+
+      <% @pupil_id = actual.pupil_id%>
+
+      <td><%= Pupil.find(@pupil_id).first_name%></td>
+      <td><%= Pupil.find(@pupil_id).last_name%></td>
+      <td><%= actual.attendance%></td>
+      <td><%=actual.circumstances%></td>
+
+
+    </tr>
+      <%end%>
+<%= form_tag actuals_path, method: :put do %>
+      <% @pupils.each_with_index do |pupil, index| %>
+        <tr>
+          <td><%= pupil.first_name %> <%= pupil.last_name %></td>
+          <%pupil.id%>
+          <% @todays_actual = @actuals.where(:pupil_id => pupil.id).where(:date => Date.today)%>
+          <% @x = @todays_actual.first.attendance%>
+          <% @y = @todays_actual.first.circumstances%>
+          <td>
+            <%= select_tag "actuals[#{index}][attendance]", options_for_select(["", "Present", "Absent"], @x) %>
+            <%= select_tag "actuals[#{index}][circumstances]", options_for_select(["", "Late", "Ill", "left early", "Appointment"], @y) %>
+            <%= hidden_field_tag "actuals[#{index}][pupil_id]", pupil.id %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= submit_tag %>
+<%end%>
+<div>

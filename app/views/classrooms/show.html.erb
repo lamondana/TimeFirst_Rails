@@ -16,12 +16,16 @@
   <table>
     <tr>
       <th>Pupils</th>
+      <th>Attendance</th>
+      <th>Circumstances</th>
+
     </tr>
     <% @pupils.each_with_index do |pupil, index| %>
       <tr>
         <td><%= pupil.first_name %> <%= pupil.last_name %></td>
         <td>
           <%= select_tag "actuals[#{index}][attendance]", options_for_select([["Select One", ""], "Present", "Absent"]) %>
+          <%= select_tag "actuals[#{index}][circumstances]", options_for_select([["Select One", ""], "Late", "Ill"]) %>
           <%= hidden_field_tag "actuals[#{index}][pupil_id]", pupil.id %>
         </td>
       </tr>

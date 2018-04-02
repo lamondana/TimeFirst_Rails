@@ -8,14 +8,12 @@
       <div id = "header">
           <h2>TimeFirst</h2>
           <h3><%= Time.now.strftime("%A, %d/%m/%Y") %></h3>
+          <br>
+          <% if session[:user_id] %>
+          <h4> You are logged as <%=  @username =Teacher.find(session[:user_id]).first_name%></h4>
+          <%end%>
       </div>
           <div id='main'>
-          <% if !flash[:notice].blank? %>
-            <div class= 'notice'>
-              <%=flash[:notice]%>
-            </div>
-          <%end%>
-
 
           <div id='content'>
           <%= yield %>

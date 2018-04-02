@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207140247) do
+ActiveRecord::Schema.define(version: 20180309172140) do
 
   create_table "actuals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "pupil_id"
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 20180207140247) do
     t.string "first_name"
     t.string "last_name"
     t.string "username"
-    t.string "password"
     t.integer "classroom_id"
+    t.string "password_digest"
     t.index ["users_id"], name: "index_teachers_on_users_id"
   end
 

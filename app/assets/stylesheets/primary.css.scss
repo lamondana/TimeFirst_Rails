@@ -3,10 +3,10 @@
 /* Colors */
 $red: #993120;
 $green: #94B26F;
-$light_green: #B6D491;
+$light_green: #ADD8E6;
 $yellow: #F2DC87;
 $dark_brown: #332318;
-$light_brown: #4C2516;
+$light_brown: #ADD8E6;
 $white: #FFFFFF;
 
 $sans_serif: Verdana,Lucida,Arial,Helvetica,sans-serif;
@@ -49,7 +49,7 @@ a:hover {}
   height: 4em;
   padding-top: 1em;
   text-align: center;
-  background: $red;
+  background: $dark_brown;
   color: $white;
 
   h1 { margin: 0; padding: 0; }
